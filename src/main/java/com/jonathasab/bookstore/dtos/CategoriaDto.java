@@ -1,17 +1,10 @@
 package com.jonathasab.bookstore.dtos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.jonathasab.bookstore.domain.Categoria;
-import com.jonathasab.bookstore.domain.Livro;
 
 public class CategoriaDto implements Serializable{
 
