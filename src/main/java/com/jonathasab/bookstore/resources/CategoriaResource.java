@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import com.jonathasab.bookstore.domain.Categoria;
 import com.jonathasab.bookstore.dtos.CategoriaDto;
 import com.jonathasab.bookstore.service.CategoriaService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
@@ -45,7 +49,7 @@ public class CategoriaResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> Create(@RequestBody Categoria categoria)
+	public ResponseEntity<Categoria> Create(@Valid @RequestBody Categoria categoria)
 	{
 		categoria = service.Create(categoria);	
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
@@ -53,7 +57,7 @@ public class CategoriaResource {
 	}	
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoriaDto> Update(@PathVariable Integer id, @RequestBody CategoriaDto categoriaDto)
+	public ResponseEntity<CategoriaDto> Update(@PathVariable Integer id, @Valid @RequestBody CategoriaDto categoriaDto)
 	{
 		Categoria categoria = service.Update(id, categoriaDto);		
 		return ResponseEntity.ok().body(new CategoriaDto(categoria));
